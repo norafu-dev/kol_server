@@ -32,7 +32,7 @@ function setupSocketHandlers() {
 async function startServer() {
   try {
     // 1. 先启动 HTTP 服务器
-    const port = process.env.SERVER_PORT || 3001;
+    const port = process.env.PORT || 3001;
     await new Promise((resolve) => {
       server.listen(port, () => {
         console.log(`Server started on port ${port}`);
