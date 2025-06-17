@@ -14,7 +14,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    methods: ["GET", "POST"],
   },
 });
 
@@ -31,9 +32,10 @@ function setupSocketHandlers() {
 async function startServer() {
   try {
     // 1. 先启动 HTTP 服务器
+    const port = process.env.SERVER_PORT || 3001;
     await new Promise((resolve) => {
-      server.listen(3001, () => {
-        console.log("Server started on port 3001");
+      server.listen(port, () => {
+        console.log(`Server started on port ${port}`);
         resolve();
       });
     });
